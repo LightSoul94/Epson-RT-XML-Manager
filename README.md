@@ -55,17 +55,13 @@ DEVICE_PORT=80
 
 ## Utilizzo
 
-1. **Avvia l'applicazione**:
-   ```bash
-   npm start
-   ```
-2. **Genera e Configura**:
-   - Inserisci i dati nei campi del form e genera i comandi XML personalizzati per la tua intestazione.
-   - Assicurati che la Partita IVA e altri campi obbligatori siano correttamente impostati.
-3. **Invia al Dispositivo**:
-   - Utilizza l’interfaccia per inviare i comandi XML generati al registratore Epson RT.
-4. **Copia le Configurazioni**:
+1. **Genera e Configura**:
+   - Inserisci i dati nei campi dei form e genera i comandi XML personalizzati per la tua intestazione.
+   - Assicurati che campi obbligatori come la Partita IVA siano correttamente impostati.
+2. **Copia le Configurazioni**:
    - Usa il pulsante di copia per trasferire facilmente i dati negli appunti.
+3. **Invia al Dispositivo**:
+   - Trasmetti i comandi XML copiati negli appunti al registratore Epson RT.
 
 ## Contributi
 
