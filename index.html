@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT Manager</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2 class="mb-4">Compila i Campi</h2>
+        <form id="form">
+            <!-- Campo 1 -->
+            <div class="row mb-3">
+                <div class="col-4">
+                    <select class="form-select">
+                        <option>Ragione Sociale</option>
+                        <option>Indirizzo Locale</option>
+                        <option>P.iva</option>
+                        <option>Generico</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                </div>
+            </div>
+            <!-- Campo 2 -->
+            <div class="row mb-3">
+                <div class="col-4">
+                    <select class="form-select">
+                        <option>Ragione Sociale</option>
+                        <option>Indirizzo Locale</option>
+                        <option>P.iva</option>
+                        <option>Generico</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                </div>
+            </div>
+            <!-- Campo 3 -->
+            <div class="row mb-3">
+                <div class="col-4">
+                    <select class="form-select">
+                        <option>Ragione Sociale</option>
+                        <option selected>Indirizzo Locale</option>
+                        <option>P.iva</option>
+                        <option>Generico</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                </div>
+            </div>
+            <!-- Campo 4 -->
+            <div class="row mb-3">
+                <div class="col-4">
+                    <select class="form-select">
+                        <option>Ragione Sociale</option>
+                        <option selected>Indirizzo Locale</option>
+                        <option>P.iva</option>
+                        <option>Generico</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                </div>
+            </div>
+            <!-- Campo 5 -->
+            <div class="row mb-3">
+                <div class="col-4">
+                    <select class="form-select">
+                        <option>Ragione Sociale</option>
+                        <option>Indirizzo Locale</option>
+                        <option selected>P.iva</option>
+                        <option>Generico</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                </div>
+            </div>
+            <!-- Campo 6 -->
+            <div class="row mb-3">
+                <div class="col-4">
+                    <select class="form-select">
+                        <option>Ragione Sociale</option>
+                        <option>Indirizzo Locale</option>
+                        <option>P.iva</option>
+                        <option selected>Generico</option>
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary mt-3" onclick="generaOutput()">Genera</button>
+            <button type="button" class="btn btn-secondary mt-3 ms-2" onclick="pulisciForm()">Pulisci</button>
+        </form>
+        <div class="mt-4">
+            <label for="outputBox" class="form-label">Risultato Generato:</label>
+            <textarea id="outputBox" class="form-control" rows="10" readonly></textarea>
+            <button onclick="copyToClipboard()" class="btn btn-primary mt-2">Copia</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
