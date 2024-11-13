@@ -42,10 +42,6 @@
    ```bash
    cd Epson-RT-XML-Manager
    ```
-3. Installa le dipendenze:
-   ```bash
-   npm install
-   ```
 
 ## Configurazione
 
