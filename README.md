@@ -1,6 +1,6 @@
 # Epson RT XML Manager
 
-![Epson RT XML Manager Logo](https://yourimagelink.com/logo.png)
+![Epson RT XML Manager Logo](icon.ico)
 
 **Epson RT XML Manager** è uno strumento versatile per gestire e configurare in modo efficiente le intestazioni e altre impostazioni su registratori telematici Epson RT tramite comandi XML. Facilita l'amministrazione delle impostazioni fiscali e ottimizza i processi di configurazione per gli utenti.
 
