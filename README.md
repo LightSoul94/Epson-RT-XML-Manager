@@ -82,12 +82,3 @@ Questo progetto è distribuito sotto la licenza MIT. Per maggiori dettagli, cons
 ---
 
 Grazie per aver scelto **Epson RT XML Manager**! Semplifichiamo la gestione fiscale insieme.
-```
-
-### Descrizione del Contenuto
-- **Badge e logo**: Puoi aggiungere un logo o un’immagine per un tocco professionale.
-- **Sommario**: Indice per un facile accesso alle sezioni.
-- **Caratteristiche e Requisiti**: Spiega cosa fa l’app e di cosa ha bisogno.
-- **Installazione e Configurazione**: Passaggi chiari e semplici.
-- **Utilizzo**: Come usare il progetto.
-- **Contributi e Licenza**: Incoraggiamento alla collaborazione e trasparenza sulla licenza.
