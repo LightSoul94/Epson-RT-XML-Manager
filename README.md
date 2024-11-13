@@ -1,4 +1,3 @@
-```markdown
 # Epson RT XML Manager
 
 ![Epson RT XML Manager Logo](https://yourimagelink.com/logo.png)
