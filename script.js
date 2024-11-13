@@ -1,6 +1,31 @@
+/** TOGGLE MENU**/
+document.addEventListener("DOMContentLoaded", function () {
+    // Seleziona gli elementi della pagina
+    const radioIntestazione = document.getElementById("btnradio1");
+    const radioLogo = document.getElementById("btnradio2");
+    const menuIntestazione = document.getElementById("menu-intestazione");
+    const menuLogo = document.getElementById("menu-logo");
 
+    // Funzione per gestire la visibilità delle sezioni
+    function updateVisibility() {
+        if (radioIntestazione.checked) {
+            menuIntestazione.style.display = "block";
+            menuLogo.style.display = "none";
+        } else if (radioLogo.checked) {
+            menuIntestazione.style.display = "none";
+            menuLogo.style.display = "block";
+        }
+    }
 
+    // Aggiungi event listener per rilevare i cambiamenti
+    radioIntestazione.addEventListener("change", updateVisibility);
+    radioLogo.addEventListener("change", updateVisibility);
 
+    // Esegui una volta all'inizio per impostare lo stato iniziale
+    updateVisibility();
+});
+
+/** MENU INTESTAZIONE SCONTRINO **/
 function generaOutput() {
     const rows = document.querySelectorAll("#form .row");
     let rowNumber = 1;
@@ -32,6 +57,7 @@ function generaOutput() {
     }
 }
 
+// Funzione per generare il codice XML
 function formatXMLRow(rowNumber, select, input) {
     let centeredText = centerHeader(input);
     let formattedRow = "";
@@ -56,7 +82,7 @@ function formatXMLRow(rowNumber, select, input) {
     return formattedRow;
 }
 
-
+// Funzione per centrare la descrizione
 function centerHeader(text) {
     // Calcola la lunghezza del testo
     const textLength = text.length;
@@ -75,8 +101,9 @@ function centerHeader(text) {
     return paddedText;
 }
 
-function copyToClipboard() {
-    const outputBox = document.getElementById("outputBox");
+// Funzione per copiare il contenuto della textarea
+function copyIntestazioneToClipboard() {
+    const outputBox = document.getElementById("outputIntestazioneBox");
     navigator.clipboard.writeText(outputBox.value).then(() => {
         Swal.fire({
             icon: 'success',
@@ -95,6 +122,7 @@ function copyToClipboard() {
     });
 }
 
+// Funzione per svuotare i campi
 function pulisciForm() {
     // Svuota tutti i campi input di testo
     document.querySelectorAll("#form input[type='text']").forEach(input => input.value = "");
@@ -124,4 +152,58 @@ function pulisciForm() {
 
     // Svuota la textarea di output
     document.getElementById("outputBox").value = "";
+}
+
+
+/** MENU LOGO **/
+// Funzione per generare il base64
+function generateBase64() {
+    const fileInput = document.getElementById("logoInput");
+    const base64Output = document.getElementById("base64Output");
+
+    // Controllo: verificare che sia stato selezionato un file
+    if (fileInput.files.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Errore',
+            text: 'Per favore, seleziona un\'immagine prima di generare il base64.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    // Legge il file come base64
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        base64Output.value = event.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+// Funzione per copiare il contenuto della textarea
+function copyLogoToClipboard() {
+    const base64Output = document.getElementById("base64Output");
+    navigator.clipboard.writeText(base64Output.value).then(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Contenuto copiato!',
+            showConfirmButton: false,
+            timer: 1000
+        });
+    }).catch(err => {
+        console.error("Errore nella copia del testo: ", err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Errore nella copia',
+            text: 'Si è verificato un problema nel copiare il testo.',
+            showConfirmButton: true,
+        });
+    });
+}
+
+// Funzione per svuotare tutti i campi
+function clearFields() {
+    document.getElementById("logoInput").value = "";
+    document.getElementById("base64Output").value = "";
 }
