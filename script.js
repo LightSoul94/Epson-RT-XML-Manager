@@ -62,12 +62,12 @@ function centerHeader(text) {
     const textLength = text.length;
 
     // Se la lunghezza del testo è maggiore o uguale alla larghezza totale, non aggiunge spazi
-    if (textLength >= 42) {
+    if (textLength >= 40) {
         return text;
     }
 
     // Calcolo degli spazi su ciascun lato per centrare il testo
-    const padding = Math.floor((42 - textLength) / 2);
+    const padding = Math.floor((40 - textLength) / 2);
 
     // Costruzione della stringa centrata
     const paddedText = " ".repeat(padding) + text + " ".repeat(42 - textLength - padding);
