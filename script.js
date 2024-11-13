@@ -6,7 +6,7 @@ function generaOutput() {
     let rowNumber = 1;
     let partitaIvaValida = false;
 
-    const result = Array.from(rows).map(row => {
+    const xmlCommands = Array.from(rows).map(row => {
         const select = row.querySelector("select").value;
         const input = row.querySelector("input").value;
         // Controlla se il campo è "P.iva" e contiene "P.IVA"
@@ -20,7 +20,7 @@ function generaOutput() {
     }).join('\n');
 
     if (partitaIvaValida) {
-        document.getElementById("outputBox").value = `<printerCommands>\n${result}\n</printerCommands>`;
+        document.getElementById("outputBox").value = `<printerCommands>\n${xmlCommands}\n</printerCommands>`;
     } else {
         console.warn(`Deve essere presente almeno un campo "P.iva" con il testo "P.IVA`);
         Swal.fire({
