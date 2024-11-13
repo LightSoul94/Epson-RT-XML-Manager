@@ -28,7 +28,6 @@
 
 ## Requisiti di Sistema
 
-- **Node.js** versione 14 o superiore
 - **Git** per il controllo di versione
 - **Registratore Telematico Epson RT** compatibile con comandi XML
 - Browser moderno per l’interfaccia utente
@@ -54,7 +53,7 @@ Prima di iniziare, assicurati che le impostazioni del dispositivo Epson RT siano
 
 Nel progetto, puoi configurare le impostazioni nel file `.env`:
 ```plaintext
-DEVICE_IP=192.168.1.100
+DEVICE_IP=[l'indirizzo IP del tuo RT]
 DEVICE_PORT=80
 ```
 
