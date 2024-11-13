@@ -34,7 +34,7 @@ function generaOutput() {
 
 function formatXMLRow(rowNumber, select, input) {
     let centeredText = centerHeader(input);
-    let formattedRow;
+    let formattedRow = "";
 
     switch (select) {
         case "Ragione Sociale":
