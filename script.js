@@ -45,12 +45,12 @@ function generaOutput() {
     }).join('\n');
 
     if (partitaIvaValida) {
-        document.getElementById("outputBox").value = `<printerCommands>\n${xmlCommands}\n</printerCommands>`;
+        document.getElementById("outputIntestazioneBox").value = `<printerCommands>\n${xmlCommands}\n</printerCommands>`;
     } else {
         console.warn(`Deve essere presente almeno un campo "P.iva" con il testo "P.IVA`);
         Swal.fire({
             icon: 'warning',
-            title: 'Errore',
+            title: 'Attenzione',
             text: 'Deve essere presente almeno un campo "P.iva" con il testo "P.IVA',
             showConfirmButton: true,
         });
@@ -103,8 +103,8 @@ function centerHeader(text) {
 
 // Funzione per copiare il contenuto della textarea
 function copyIntestazioneToClipboard() {
-    const outputBox = document.getElementById("outputIntestazioneBox");
-    navigator.clipboard.writeText(outputBox.value).then(() => {
+    const outputIntestazioneBox = document.getElementById("outputIntestazioneBox");
+    navigator.clipboard.writeText(outputIntestazioneBox.value).then(() => {
         Swal.fire({
             icon: 'success',
             title: 'Contenuto copiato!',
@@ -151,34 +151,147 @@ function pulisciForm() {
     });
 
     // Svuota la textarea di output
-    document.getElementById("outputBox").value = "";
+    document.getElementById("outputIntestazioneBox").value = "";
 }
 
 
 /** MENU LOGO **/
+// Validatore immagine bmp
+function validateImage(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            const buffer = event.target.result;
+            const dataView = new DataView(buffer);
+
+            // Verifica che l'immagine sia BMP
+            const isBmp = dataView.getUint16(0) === 0x424D;
+            if (!isBmp) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errore',
+                    text: 'L\'immagine deve essere in formato BMP.',
+                    showConfirmButton: true
+                });
+                return reject();
+            }
+
+            // Verifica dimensioni dell'immagine
+            const width = dataView.getUint32(18, true);
+            const height = Math.abs(dataView.getUint32(22, true)); // BMP usa segno per altezza
+
+            if (width > 576 || height > 400) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errore',
+                    text: 'L\'immagine deve avere larghezza ≤ 576 px e altezza ≤ 400 px.',
+                    showConfirmButton: true
+                });
+                return reject();
+            }
+
+            // Funzione per calcolare la saturazione di un pixel
+            function calculateSaturation(r, g, b) {
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                return max === 0 ? 0 : (max - min) / max;
+            }
+
+            // Impostazioni per il controllo dei bordi
+            const rowSize = Math.ceil((width * 24) / 8); // Calcola la larghezza della riga in byte (24 bit per pixel)
+            const pixelArrayOffset = dataView.getUint32(10, true); // Offset di inizio dell'array di pixel
+            const whitePixelValue = 255; // Valore per un pixel completamente bianco
+
+            let leftHasContent = false;
+            let rightHasContent = false;
+
+            // Controllo del bordo sinistro e destro per pixel diversi dal bianco
+            for (let y = 0; y < height; y++) {
+                // Bordo sinistro
+                const leftIndex = pixelArrayOffset + y * rowSize;
+                const rLeft = dataView.getUint8(leftIndex + 2);
+                const gLeft = dataView.getUint8(leftIndex + 1);
+                const bLeft = dataView.getUint8(leftIndex);
+
+                if (!(rLeft === whitePixelValue && gLeft === whitePixelValue && bLeft === whitePixelValue)) {
+                    leftHasContent = true;
+                }
+
+                // Bordo destro
+                const rightIndex = pixelArrayOffset + y * rowSize + (rowSize - 3);
+                const rRight = dataView.getUint8(rightIndex + 2);
+                const gRight = dataView.getUint8(rightIndex + 1);
+                const bRight = dataView.getUint8(rightIndex);
+
+                if (!(rRight === whitePixelValue && gRight === whitePixelValue && bRight === whitePixelValue)) {
+                    rightHasContent = true;
+                }
+
+                // Se entrambi i lati hanno contenuto, interrompe il ciclo
+                if (leftHasContent && rightHasContent) {
+                    break;
+                }
+            }
+
+            if (!leftHasContent || !rightHasContent) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Errore',
+                    text: 'L\'immagine deve avere almeno un pixel non bianco a sinistra e a destra.',
+                    showConfirmButton: true
+                });
+                return reject();
+            }
+
+            resolve();
+        };
+
+        reader.onerror = function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Errore',
+                text: 'Errore durante la lettura del file.',
+                showConfirmButton: true
+            });
+            reject();
+        };
+
+        // Legge il file come array buffer per analizzarlo
+        reader.readAsArrayBuffer(file);
+    });
+}
+
+
+
 // Funzione per generare il base64
 function generateBase64() {
     const fileInput = document.getElementById("logoInput");
     const base64Output = document.getElementById("base64Output");
 
-    // Controllo: verificare che sia stato selezionato un file
-    if (fileInput.files.length === 0) {
+    const file = fileInput.files[0];
+    if (!file) {
         Swal.fire({
-            icon: 'error',
-            title: 'Errore',
-            text: 'Per favore, seleziona un\'immagine prima di generare il base64.',
+            icon: 'warning',
+            title: 'Attenzione',
+            text: 'Seleziona un\'immagine per poter generare il base64.',
             confirmButtonText: 'OK'
         });
         return;
     }
 
-    // Legge il file come base64
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        base64Output.value = event.target.result;
-    };
-    reader.readAsDataURL(file);
+    // Verifica se l'immagine rispetta i requisiti prima di generare il Base64
+    validateImage(file).then(() => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            base64Output.value = `<setLogo location="0" index="1">\n${event.target.result}\n</setLogo>`;
+        };
+        reader.readAsDataURL(file);
+    }).catch(() => {
+        // Reimposta il campo di input e l'output se la validazione fallisce
+        fileInput.value = "";
+        base64Output.value = "";
+    });
 }
 
 // Funzione per copiare il contenuto della textarea

@@ -118,7 +118,7 @@
                 <button type="button" class="btn btn-secondary mt-3 ms-2 col-5" onclick="pulisciForm()">Pulisci</button>
             </form>
             <div class="mt-4">
-                <label for="outputIntestazioneBox" class="form-label">Risultato Generato:</label>
+                <label for="outputIntestazioneBox" class="form-label">Codice XML:</label>
                 <textarea id="outputIntestazioneBox" class="form-control" rows="10" readonly></textarea>
                 <div class="d-flex justify-content-end">
                     <button onclick="copyIntestazioneToClipboard()" class="btn btn-primary mt-2 col-3">Copia</button>
@@ -132,7 +132,7 @@
                 <!-- Input per caricare il logo -->
                 <div class="mb-3">
                     <label for="logoInput" class="form-label">Seleziona un'immagine</label>
-                    <input type="file" class="form-control" id="logoInput" accept="image/*">
+                    <input type="file" class="form-control" id="logoInput" accept=".bmp">
                 </div>
 
                 <!-- Bottone per generare base64 -->
@@ -142,7 +142,7 @@
 
             <!-- Textarea per visualizzare il risultato in base64 -->
             <div class="mt-4">
-                <label for="base64Output" class="form-label">Codice Base64 Generato:</label>
+                <label for="base64Output" class="form-label">Codice XML:</label>
                 <textarea id="base64Output" class="form-control" rows="10" readonly></textarea>
                 <div class="d-flex justify-content-end">
                     <button onclick="copyLogoToClipboard()" class="btn btn-primary mt-2 col-3">Copia</button>
