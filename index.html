@@ -27,7 +27,7 @@
     <div class="d-flex justify-content-center">
 
         <!-- INTESTAZIONE SCONTRINO -->
-        <div class="container my-2" id="menu-intestazione">
+        <div class="container my-2 col-6" id="menu-intestazione">
             <h2 class="mb-4">Compila i Campi</h2>
             <form id="form">
                 <!-- Campo 1 -->
@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                        <input type="text" class="form-control" maxlength="40" placeholder="Inserisci il testo qui...">
                     </div>
                 </div>
                 <!-- Campo 2 -->
@@ -55,7 +55,7 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                        <input type="text" class="form-control" maxlength="40" placeholder="Inserisci il testo qui...">
                     </div>
                 </div>
                 <!-- Campo 3 -->
@@ -69,7 +69,7 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                        <input type="text" class="form-control" maxlength="40" placeholder="Inserisci il testo qui...">
                     </div>
                 </div>
                 <!-- Campo 4 -->
@@ -83,7 +83,7 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                        <input type="text" class="form-control" maxlength="40" placeholder="Inserisci il testo qui...">
                     </div>
                 </div>
                 <!-- Campo 5 -->
@@ -97,7 +97,7 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                        <input type="text" class="form-control" maxlength="40" placeholder="Inserisci il testo qui...">
                     </div>
                 </div>
                 <!-- Campo 6 -->
@@ -111,11 +111,13 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Inserisci il testo qui...">
+                        <input type="text" class="form-control" maxlength="40" placeholder="Inserisci il testo qui...">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary mt-3 col-6" onclick="generaOutput()">Genera</button>
-                <button type="button" class="btn btn-secondary mt-3 ms-2 col-5" onclick="pulisciForm()">Pulisci</button>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary mt-3 col-3" onclick="generaOutput()">Genera</button>
+                    <button type="button" class="btn btn-secondary mt-3 ms-2 col-3" onclick="pulisciForm()">Pulisci</button>
+                </div>
             </form>
             <div class="mt-4">
                 <label for="outputIntestazioneBox" class="form-label">Codice XML:</label>
@@ -126,7 +128,7 @@
             </div>
         </div>
         <!-- LOGO SCONTRINO -->
-        <div class="container my-5" id="menu-logo" style="display: none;">
+        <div class="container my-5 col-6" id="menu-logo" style="display: none;">
             <h2 class="mb-4">Carica il Logo</h2>
             <form id="logo-form">
                 <!-- Input per caricare il logo -->
@@ -138,8 +140,10 @@
                 </div>
 
                 <!-- Bottone per generare base64 -->
-                <button type="button" class="btn btn-primary mt-3" onclick="generateBase64()">Genera Base64</button>
-                <button type="button" class="btn btn-secondary mt-3 ms-2" onclick="clearFields()">Pulisci</button>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary mt-3 col-3" onclick="generateBase64()">Genera Base64</button>
+                    <button type="button" class="btn btn-secondary mt-3 ms-2 col-3" onclick="clearFields()">Pulisci</button>
+                </div>
             </form>
 
             <!-- Textarea per visualizzare il risultato in base64 -->
