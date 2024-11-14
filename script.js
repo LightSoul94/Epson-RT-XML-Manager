@@ -34,15 +34,21 @@ function generaOutput() {
     const xmlCommands = Array.from(rows).map(row => {
         const select = row.querySelector("select").value;
         const input = row.querySelector("input").value;
+
+        let formattedRow = "";
         // Controlla se il campo è "P.iva" e contiene "P.IVA"
         if (select === "P.iva" && input.includes("P.IVA")) {
             partitaIvaValida = true;
         }
-        const formattedRow = formatXMLRow(rowNumber, select, input);
-        rowNumber++;
+        if (input.length > 0) {
+            formattedRow = formatXMLRow(rowNumber, select, input);
+            rowNumber++;
+        }
+        
         return formattedRow;
 
-    }).join('\n');
+    }).filter(formattedRow => formattedRow !== "") // Filtra le righe vuote
+    .join('\n');
 
     if (partitaIvaValida) {
         document.getElementById("outputIntestazioneBox").value = `<printerCommands>\n${xmlCommands}\n</printerCommands>`;
@@ -65,19 +71,19 @@ function formatXMLRow(rowNumber, select, input) {
     switch (select) {
         case "Ragione Sociale":
             formattedRow += `<directIO command="3016" data="${rowNumber.toString().padStart(2, '0')}${centeredText}" />\n`;
-            formattedRow += `<directIO command="4016" data="${rowNumber.toString().padStart(2, '0')}4" />`;
+            formattedRow += `<directIO command="4016" data="${rowNumber}4" />`;
             break;
         case "Indirizzo Locale":
             formattedRow += `<directIO command="3016" data="${rowNumber.toString().padStart(2, '0')}${centeredText}" />\n`;
-            formattedRow += `<directIO command="4016" data="${rowNumber.toString().padStart(2, '0')}1" />`;
+            formattedRow += `<directIO command="4016" data="${rowNumber}1" />`;
             break;
         case "P.iva":
             formattedRow += `<directIO command="3016" data="${rowNumber.toString().padStart(2, '0')}${centeredText}" />\n`;
-            formattedRow += `<directIO command="4016" data="${rowNumber.toString().padStart(2, '0')}2" />`;
+            formattedRow += `<directIO command="4016" data="${rowNumber}2" />`;
             break;
         default:
             formattedRow += `<directIO command="3016" data="${rowNumber.toString().padStart(2, '0')}${centeredText}" />\n`;
-            formattedRow += `<directIO command="4016" data="${rowNumber.toString().padStart(2, '0')}1" />`;
+            formattedRow += `<directIO command="4016" data="${rowNumber}1" />`;
     }
     return formattedRow;
 }
