@@ -290,7 +290,13 @@ function generateBase64() {
     validateImage(file).then(() => {
         const reader = new FileReader();
         reader.onload = function (event) {
-            base64Output.value = `<setLogo location="0" index="1">\n${event.target.result}\n</setLogo>`;
+            base64Output.value = 
+            `<printerNonFiscal>
+                <beginNonFiscal />
+                    <setLogo operator="" location="0" index="1" option="0" graphicFormat="B">${event.target.result}</setLogo>
+                <endNonFiscal />
+            </printerNonFiscal>
+            `;
         };
         reader.readAsDataURL(file);
     }).catch(() => {
