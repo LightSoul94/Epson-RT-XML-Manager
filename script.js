@@ -53,11 +53,11 @@ function generaOutput() {
     if (partitaIvaValida) {
         document.getElementById("outputIntestazioneBox").value = `<printerCommands>\n${xmlCommands}\n</printerCommands>`;
     } else {
-        console.warn(`Deve essere presente almeno un campo "P.iva" con il testo "P.IVA`);
+        console.warn(`Deve essere presente almeno un campo 'P.iva' con il testo 'P.IVA' scritto all'interno del campo a destra`);
         Swal.fire({
             icon: 'warning',
             title: 'Attenzione',
-            text: 'Deve essere presente almeno un campo "P.iva" con il testo "P.IVA',
+            text: `Deve essere presente almeno un campo 'P.iva' con il testo 'P.IVA' scritto all'interno del campo a destra`,
             showConfirmButton: true,
         });
     }

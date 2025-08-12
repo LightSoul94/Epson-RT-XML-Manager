@@ -116,7 +116,8 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-primary mt-3 col-3" onclick="generaOutput()">Genera</button>
-                    <button type="button" class="btn btn-secondary mt-3 ms-2 col-3" onclick="pulisciForm()">Pulisci</button>
+                    <button type="button" class="btn btn-secondary mt-3 ms-2 col-3"
+                        onclick="pulisciForm()">Pulisci</button>
                 </div>
             </form>
             <div class="mt-4">
@@ -135,14 +136,23 @@
                 <div class="mb-3">
                     <label for="logoInput" class="form-label">
                         Seleziona un'immagine <span style="color: red;">*</span>
-                    </label>                    
+                    </label>
+                    </br>
+                    <p>- Sono ammessi solo i seguenti colori: bianco, nero</br>
+                        - formato .bmp (windows)</br>
+                        - Dimensioni massime consentite: Altezza 400px; Larghezza 576px</br>
+                        - Dimensioni minime consentite: Altezza 200px; Larghezza 300px</br>
+                        - I bordi laterali sinistra e destra NON devono essere bianchi</br>
+                        - Il fondo NON deve essere trasparente</br></p>
                     <input type="file" class="form-control" id="logoInput" accept=".bmp">
                 </div>
 
                 <!-- Bottone per generare base64 -->
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary mt-3 col-3" onclick="generateBase64()">Genera Base64</button>
-                    <button type="button" class="btn btn-secondary mt-3 ms-2 col-3" onclick="clearFields()">Pulisci</button>
+                    <button type="button" class="btn btn-primary mt-3 col-3" onclick="generateBase64()">Genera
+                        Base64</button>
+                    <button type="button" class="btn btn-secondary mt-3 ms-2 col-3"
+                        onclick="clearFields()">Pulisci</button>
                 </div>
             </form>
 
@@ -156,6 +166,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Start of soluzioniinformatiche Zendesk Widget script -->
+    <script id="ze-snippet"
+        src="https://static.zdassets.com/ekr/snippet.js?key=9e4e0072-b54d-4698-a0ba-c89d88429c4e"> </script>
+    <!-- End of soluzioniinformatiche Zendesk Widget script -->
     <script src="script.js"></script>
 </body>
 
